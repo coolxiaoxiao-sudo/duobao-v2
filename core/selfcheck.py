@@ -16,7 +16,7 @@ def _bad(msg):
     return {"ok": False, "msg": msg}
 
 
-def _try(fn, ok_msg="ok"):
+def _try(fn):
     try:
         return fn()
     except Exception as e:
@@ -66,12 +66,9 @@ def check_db():
     if not p or not os.path.exists(p):
         return _bad(f"数据库不存在: {p}")
 
-    def _q():
-        row = db.query_one("SELECT COUNT(*) AS cnt FROM stock_daily")
-        cnt = row.get("cnt") if isinstance(row, dict) else None
-        return _ok(f"stock_daily 行数: {cnt}")
-
-    return _try(_q)
+    row = db.query_one("SELECT COUNT(*) AS cnt FROM stock_daily")
+    cnt = row.get("cnt") if isinstance(row, dict) else None
+    return _ok(f"stock_daily 行数: {cnt}")
 
 
 def check_tencent():
@@ -90,7 +87,6 @@ def check_deepseek():
     if not config.deepseek_key:
         return _bad("DeepSeek Key 未配置")
 
-    # 用极小 token 做连通性测试
     r = deepseek.chat(
         [
             {"role": "system", "content": "只回复OK"},
@@ -106,9 +102,8 @@ def check_deepseek():
 def check_outputs():
     base = os.path.dirname(os.path.dirname(__file__))
     latest = os.path.join(base, "data", "latest_report.md")
-    dated_dir = os.path.join(base, "data")
     ok_latest = os.path.exists(latest)
-    return _ok(f"latest_report.md 存在" if ok_latest else f"latest_report.md 不存在（先运行一次 python .\\main.py 生成）")
+    return _ok("latest_report.md 存在" if ok_latest else "latest_report.md 不存在（先运行一次 python .\\main.py 生成）")
 
 
 def check_dashboard_port():
@@ -124,7 +119,7 @@ def check_dashboard_port():
         s.close()
 
 
-def run(print_json=False):
+def run(print_json: bool = False, quiet: bool = False) -> dict:
     checks = {
         "python": _ok(f"{sys.version.split()[0]} @ {sys.executable}"),
         "imports": check_imports(),
@@ -144,14 +139,17 @@ def run(print_json=False):
     }
 
     if print_json:
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        if not quiet:
+            print(json.dumps(result, ensure_ascii=False, indent=2))
         return result
 
-    print("\n=== 多宝 v2 自检报告 ===")
-    print(f"时间: {result['time']}")
-    print(f"总体: {'OK' if ok_all else 'FAIL'}")
-    for k, v in checks.items():
-        flag = "✅" if v.get("ok") else "❌"
-        print(f"{flag} {k}: {v.get('msg')}")
-    print("========================\n")
+    if not quiet:
+        print("\n=== 多宝 v2 自检报告 ===")
+        print(f"时间: {result['time']}")
+        print(f"总体: {'OK' if ok_all else 'FAIL'}")
+        for k, v in checks.items():
+            flag = "✅" if v.get("ok") else "❌"
+            print(f"{flag} {k}: {v.get('msg')}")
+        print("========================\n")
+
     return result

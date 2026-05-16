@@ -1,5 +1,6 @@
-﻿"""Obsidian 输出 — 将分析结果自动写入笔记库（SOLO专区）"""
-import os, sys
+﻿"""Obsidian 输出 — 将分析结果自动写入 solo 仓库（并自动更新 HOME）"""
+import os
+import sys
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -15,7 +16,7 @@ def _vault() -> str:
 
 
 def _root_dir() -> str:
-    # 用于与其他工具/Claude Code 共用 Obsidian Vault 时隔离输出
+    # 如果你仍使用同一 Vault 多系统共存，可用 root_dir 做隔离；solo 独立仓库场景通常为空
     return config.get("notifications", "obsidian", "root_dir", default="")
 
 
@@ -25,33 +26,45 @@ def _root_path() -> str:
     return os.path.join(v, r) if r else v
 
 
-def _ensure_home() -> None:
-    """确保专区有一个 HOME/索引页，方便回跳。"""
+def _home_path() -> str:
+    return os.path.join(_root_path(), "HOME.md")
+
+
+def _write_home(last_date: str | None = None) -> None:
+    """每次输出后更新 HOME，让你打开仓库第一眼就看到入口。"""
     try:
         root = _root_path()
         if not root:
             return
         os.makedirs(root, exist_ok=True)
-        p = os.path.join(root, "HOME.md")
-        if os.path.exists(p):
-            return
-        with open(p, "w", encoding="utf-8") as f:
-            f.write(
-                "# SOLO · 多宝 v2\n\n"
-                "这是 SOLO 生成的分析内容专区（与其他工具输出隔离）。\n\n"
-                "## 快速入口\n"
-                "- [[30-日报/]]\n"
-                "- [[10-交易/交易日志/]]\n"
-            )
+
+        ds = last_date or datetime.now().strftime("%Y-%m-%d")
+        daily_rel = config.get("notifications", "obsidian", "daily_report_path", default="30-日报")
+        audit_rel = config.get("notifications", "obsidian", "trade_log_path", default="10-交易/交易日志")
+
+        content = (
+            "---\n"
+            "tags: [SOLO, 多宝v2]\n"
+            "---\n\n"
+            "# HOME（SOLO · 多宝 v2）\n\n"
+            f"- 更新时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+            "## 今日入口\n"
+            f"- [[{daily_rel}/盘后报告-{ds}|📝 盘后报告-{ds}]]\n"
+            f"- [[{audit_rel}/持仓审计-{ds}|📋 持仓审计-{ds}]]\n\n"
+            "## 目录\n"
+            f"- [[{daily_rel}/|30-日报]]\n"
+            f"- [[{audit_rel}/|10-交易/交易日志]]\n"
+        )
+
+        with open(_home_path(), "w", encoding="utf-8") as f:
+            f.write(content)
     except Exception as e:
-        logger.warning(f"HOME 初始化失败: {e}")
+        logger.warning(f"HOME 更新失败: {e}")
 
 
 def save_daily(report_text, date_str=None):
     if not config.get("notifications", "obsidian", "enabled", default=True):
         return
-
-    _ensure_home()
 
     ds = date_str or datetime.now().strftime("%Y-%m-%d")
     daily_rel = config.get("notifications", "obsidian", "daily_report_path", default="30-日报")
@@ -68,9 +81,10 @@ def save_daily(report_text, date_str=None):
             f"# 盘后报告 {ds}\n\n"
             f"{report_text}\n\n"
             f"---\n"
-            f"> [[HOME|← 返回SOLO专区]]\n"
+            f"> [[HOME|← 返回HOME]]\n"
         )
 
+    _write_home(last_date=ds)
     logger.info(f"日报已存: {p}")
 
 
@@ -78,11 +92,9 @@ def save_audit(audit_data, date_str=None):
     if not config.get("notifications", "obsidian", "enabled", default=True):
         return
 
-    _ensure_home()
-
     ds = date_str or datetime.now().strftime("%Y-%m-%d")
-    trade_rel = config.get("notifications", "obsidian", "trade_log_path", default="10-交易/交易日志")
-    d = os.path.join(_root_path(), trade_rel)
+    audit_rel = config.get("notifications", "obsidian", "trade_log_path", default="10-交易/交易日志")
+    d = os.path.join(_root_path(), audit_rel)
     os.makedirs(d, exist_ok=True)
 
     p = os.path.join(d, f"持仓审计-{ds}.md")
@@ -102,9 +114,10 @@ def save_audit(audit_data, date_str=None):
             f"- T趋势:{sc.get('T','?')} B买入:{sc.get('B','?')} F基本面:{sc.get('F','?')} R风险:{sc.get('R','?')}\n"
         )
 
-    lines.append("---\n> [[HOME|← 返回SOLO专区]]\n")
+    lines.append("---\n> [[HOME|← 返回HOME]]\n")
 
     with open(p, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
+    _write_home(last_date=ds)
     logger.info(f"审计已存: {p}")
