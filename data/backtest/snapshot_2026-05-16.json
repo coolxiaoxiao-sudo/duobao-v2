@@ -1,0 +1,489 @@
+{
+  "date": "2026-05-16",
+  "stocks": {
+    "002501.SZ": {
+      "name": "*ST利源",
+      "price": 1.46,
+      "signal": "WATCH",
+      "total": 0.5533,
+      "factors": {
+        "回撤深度": 0.99,
+        "超卖强度": 0.927,
+        "连跌衰竭": 0.2,
+        "量价背离": 0.175,
+        "波动收敛": 0.418,
+        "支撑强度": 0.34
+      },
+      "technicals": {
+        "price": 1.46,
+        "ma5": 1.386,
+        "ma10": 1.432,
+        "ma20": 1.6205000000000003,
+        "rsi14": 22.2,
+        "pct_ma10": 1.96,
+        "pct_ma20": -9.9,
+        "atr14": 0.09,
+        "atr_pct": 5.82,
+        "vol_ratio": 1.65,
+        "cons_days": -1,
+        "cons_cum": -5.19,
+        "points": 60
+      },
+      "audit_action": "REDUCE",
+      "audit_total": 3.8,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 0.61,
+          "mean_reversion": 0.55,
+          "volatility": 0.5,
+          "volume_price": 0.8,
+          "valuation": 0.65,
+          "fundamental": 0.2,
+          "rel_strength": 0.5
+        },
+        "total": 5.4,
+        "signal": "WEAK"
+      }
+    },
+    "600392.SH": {
+      "name": "盛和资源",
+      "price": 25.14,
+      "signal": "WATCH",
+      "total": 0.4323,
+      "factors": {
+        "回撤深度": 0.302,
+        "超卖强度": 0.313,
+        "连跌衰竭": 0.2,
+        "量价背离": 0.56,
+        "波动收敛": 0.503,
+        "支撑强度": 0.799
+      },
+      "technicals": {
+        "price": 25.14,
+        "ma5": 26.339999999999996,
+        "ma10": 26.133,
+        "ma20": 25.924,
+        "rsi14": 40.6,
+        "pct_ma10": -3.8,
+        "pct_ma20": -3.02,
+        "atr14": 1.25,
+        "atr_pct": 4.97,
+        "vol_ratio": 0.88,
+        "cons_days": -1,
+        "cons_cum": -0.24,
+        "points": 60
+      },
+      "audit_action": "HOLD",
+      "audit_total": 5.8,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 0.72,
+          "mean_reversion": 0.43,
+          "volatility": 0.7,
+          "volume_price": 0.5,
+          "valuation": 0.55,
+          "fundamental": 0.8,
+          "rel_strength": 0.5
+        },
+        "total": 6.0,
+        "signal": "MODERATE"
+      }
+    },
+    "600905.SH": {
+      "name": "三峡能源",
+      "price": 4.11,
+      "signal": "WATCH",
+      "total": 0.4078,
+      "factors": {
+        "回撤深度": 0.039,
+        "超卖强度": 0.037,
+        "连跌衰竭": 0.2,
+        "量价背离": 0.585,
+        "波动收敛": 0.859,
+        "支撑强度": 0.974
+      },
+      "technicals": {
+        "price": 4.11,
+        "ma5": 4.180000000000001,
+        "ma10": 4.143000000000001,
+        "ma20": 4.1259999999999994,
+        "rsi14": 48.9,
+        "pct_ma10": -0.8,
+        "pct_ma20": -0.39,
+        "atr14": 0.06,
+        "atr_pct": 1.41,
+        "vol_ratio": 0.83,
+        "cons_days": -1,
+        "cons_cum": -1.2,
+        "points": 60
+      },
+      "audit_action": "REDUCE",
+      "audit_total": 3.8,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 0.8,
+          "mean_reversion": 0.41,
+          "volatility": 0.6,
+          "volume_price": 0.8,
+          "valuation": 0.65,
+          "fundamental": 0.4,
+          "rel_strength": 0.5
+        },
+        "total": 6.0,
+        "signal": "MODERATE"
+      }
+    },
+    "002366.SZ": {
+      "name": "融发核电",
+      "price": 7.6,
+      "signal": "WATCH",
+      "total": 0.4009,
+      "factors": {
+        "回撤深度": 0.262,
+        "超卖强度": 0,
+        "连跌衰竭": 0.2,
+        "量价背离": 0.575,
+        "波动收敛": 0.723,
+        "支撑强度": 0.825
+      },
+      "technicals": {
+        "price": 7.6,
+        "ma5": 7.667999999999999,
+        "ma10": 7.5920000000000005,
+        "ma20": 7.405999999999999,
+        "rsi14": 61.1,
+        "pct_ma10": 0.11,
+        "pct_ma20": 2.62,
+        "atr14": 0.21,
+        "atr_pct": 2.77,
+        "vol_ratio": 0.85,
+        "cons_days": -1,
+        "cons_cum": -0.26,
+        "points": 60
+      },
+      "audit_action": "REDUCE",
+      "audit_total": 4.2,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 0.91,
+          "mean_reversion": 0.4,
+          "volatility": 0.6,
+          "volume_price": 0.8,
+          "valuation": 0.65,
+          "fundamental": 0.2,
+          "rel_strength": 0.5
+        },
+        "total": 5.9,
+        "signal": "MODERATE"
+      }
+    },
+    "601929.SH": {
+      "name": "吉视传媒",
+      "price": 2.91,
+      "signal": "WAIT",
+      "total": 0.3918,
+      "factors": {
+        "回撤深度": 0.209,
+        "超卖强度": 0.36,
+        "连跌衰竭": 0,
+        "量价背离": 0.3,
+        "波动收敛": 0.693,
+        "支撑强度": 0.861
+      },
+      "technicals": {
+        "price": 2.91,
+        "ma5": 3.008,
+        "ma10": 2.97,
+        "ma20": 2.972,
+        "rsi14": 39.2,
+        "pct_ma10": -2.02,
+        "pct_ma20": -2.09,
+        "atr14": 0.09,
+        "atr_pct": 3.07,
+        "vol_ratio": 1.17,
+        "cons_days": 2,
+        "cons_cum": 2.37,
+        "points": 60
+      },
+      "audit_action": "CLOSE",
+      "audit_total": 2.8,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 0.67,
+          "mean_reversion": 0.39,
+          "volatility": 0.6,
+          "volume_price": 0.5,
+          "valuation": 0.65,
+          "fundamental": 0.2,
+          "rel_strength": 0.5
+        },
+        "total": 5.0,
+        "signal": "WEAK"
+      }
+    },
+    "301638.SZ": {
+      "name": "南网数字",
+      "price": 29.04,
+      "signal": "WAIT",
+      "total": 0.3503,
+      "factors": {
+        "回撤深度": 0.047,
+        "超卖强度": 0,
+        "连跌衰竭": 0.2,
+        "量价背离": 0.67,
+        "波动收敛": 0.434,
+        "支撑强度": 0.969
+      },
+      "technicals": {
+        "price": 29.04,
+        "ma5": 30.456,
+        "ma10": 29.7,
+        "ma20": 28.903000000000002,
+        "rsi14": 54.6,
+        "pct_ma10": -2.22,
+        "pct_ma20": 0.47,
+        "atr14": 1.64,
+        "atr_pct": 5.66,
+        "vol_ratio": 0.66,
+        "cons_days": -1,
+        "cons_cum": -1.89,
+        "points": 60
+      },
+      "audit_action": "HOLD",
+      "audit_total": 5.8,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 1.28,
+          "mean_reversion": 0.35,
+          "volatility": 0.5,
+          "volume_price": 0.8,
+          "valuation": 0.45,
+          "fundamental": 0.6,
+          "rel_strength": 0.5
+        },
+        "total": 6.9,
+        "signal": "MODERATE"
+      }
+    },
+    "300825.SZ": {
+      "name": "阿尔特",
+      "price": 11.32,
+      "signal": "WAIT",
+      "total": 0.3408,
+      "factors": {
+        "回撤深度": 1.0,
+        "超卖强度": 0,
+        "连跌衰竭": 0,
+        "量价背离": 0.3,
+        "波动收敛": 0.639,
+        "支撑强度": 0
+      },
+      "technicals": {
+        "price": 11.32,
+        "ma5": 10.702000000000002,
+        "ma10": 10.23,
+        "ma20": 9.5885,
+        "rsi14": 85.5,
+        "pct_ma10": 10.65,
+        "pct_ma20": 18.06,
+        "atr14": 0.41,
+        "atr_pct": 3.61,
+        "vol_ratio": 2.14,
+        "cons_days": 7,
+        "cons_cum": 13.64,
+        "points": 60
+      },
+      "audit_action": "HOLD",
+      "audit_total": 6.2,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 1.02,
+          "mean_reversion": 0.34,
+          "volatility": 0.4,
+          "volume_price": 0.8,
+          "valuation": 0.45,
+          "fundamental": 0.6,
+          "rel_strength": 0.5
+        },
+        "total": 6.2,
+        "signal": "MODERATE"
+      }
+    },
+    "688107.SH": {
+      "name": "安路科技",
+      "price": 43.88,
+      "signal": "WAIT",
+      "total": 0.3242,
+      "factors": {
+        "回撤深度": 1.0,
+        "超卖强度": 0,
+        "连跌衰竭": 0,
+        "量价背离": 0.3,
+        "波动收敛": 0.528,
+        "支撑强度": 0
+      },
+      "technicals": {
+        "price": 43.88,
+        "ma5": 39.760000000000005,
+        "ma10": 36.643,
+        "ma20": 33.4585,
+        "rsi14": 90.1,
+        "pct_ma10": 19.75,
+        "pct_ma20": 31.15,
+        "atr14": 2.07,
+        "atr_pct": 4.72,
+        "vol_ratio": 151.12,
+        "cons_days": 2,
+        "cons_cum": 12.95,
+        "points": 60
+      },
+      "audit_action": "ADD",
+      "audit_total": 7.2,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 1.07,
+          "mean_reversion": 0.32,
+          "volatility": 0.4,
+          "volume_price": 0.8,
+          "valuation": 0.45,
+          "fundamental": 0.6,
+          "rel_strength": 0.5
+        },
+        "total": 6.3,
+        "signal": "MODERATE"
+      }
+    },
+    "301316.SZ": {
+      "name": "慧博云通",
+      "price": 58.66,
+      "signal": "WAIT",
+      "total": 0.3116,
+      "factors": {
+        "回撤深度": 1.0,
+        "超卖强度": 0,
+        "连跌衰竭": 0,
+        "量价背离": 0.3,
+        "波动收敛": 0.433,
+        "支撑强度": 0.011
+      },
+      "technicals": {
+        "price": 58.66,
+        "ma5": 58.29200000000001,
+        "ma10": 55.19,
+        "ma20": 51.081,
+        "rsi14": 78.9,
+        "pct_ma10": 6.29,
+        "pct_ma20": 14.84,
+        "atr14": 3.33,
+        "atr_pct": 5.67,
+        "vol_ratio": 1.1,
+        "cons_days": 3,
+        "cons_cum": 4.44,
+        "points": 60
+      },
+      "audit_action": "ADD",
+      "audit_total": 7.2,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 1.09,
+          "mean_reversion": 0.31,
+          "volatility": 0.4,
+          "volume_price": 0.8,
+          "valuation": 0.45,
+          "fundamental": 0.8,
+          "rel_strength": 0.5
+        },
+        "total": 6.6,
+        "signal": "MODERATE"
+      }
+    },
+    "603259.SH": {
+      "name": "药明康德",
+      "price": 103.13,
+      "signal": "WAIT",
+      "total": 0.3051,
+      "factors": {
+        "回撤深度": 0.207,
+        "超卖强度": 0,
+        "连跌衰竭": 0,
+        "量价背离": 0.3,
+        "波动收敛": 0.596,
+        "支撑强度": 0.862
+      },
+      "technicals": {
+        "price": 103.13,
+        "ma5": 107.58,
+        "ma10": 108.94800000000001,
+        "ma20": 105.31300000000002,
+        "rsi14": 57.0,
+        "pct_ma10": -5.34,
+        "pct_ma20": -2.07,
+        "atr14": 4.17,
+        "atr_pct": 4.04,
+        "vol_ratio": 0.8,
+        "cons_days": 1,
+        "cons_cum": 0.12,
+        "points": 60
+      },
+      "audit_action": "HOLD",
+      "audit_total": 5.2,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 0.66,
+          "mean_reversion": 0.31,
+          "volatility": 0.7,
+          "volume_price": 0.8,
+          "valuation": 0.45,
+          "fundamental": 0.6,
+          "rel_strength": 0.5
+        },
+        "total": 5.8,
+        "signal": "MODERATE"
+      }
+    },
+    "688111.SH": {
+      "name": "金山办公",
+      "price": 251.3,
+      "signal": "WAIT",
+      "total": 0.2898,
+      "factors": {
+        "回撤深度": 0.141,
+        "超卖强度": 0,
+        "连跌衰竭": 0.2,
+        "量价背离": 0,
+        "波动收敛": 0.638,
+        "支撑强度": 0.906
+      },
+      "technicals": {
+        "price": 251.3,
+        "ma5": 264.184,
+        "ma10": 260.48900000000003,
+        "ma20": 254.88849999999996,
+        "rsi14": 52.8,
+        "pct_ma10": -3.53,
+        "pct_ma20": -1.41,
+        "atr14": 9.09,
+        "atr_pct": 3.62,
+        "vol_ratio": 75.72,
+        "cons_days": -1,
+        "cons_cum": -1.7,
+        "points": 60
+      },
+      "audit_action": "CLOSE",
+      "audit_total": 2.8,
+      "seven_dim": {
+        "dimensions": {
+          "trend": 0.77,
+          "mean_reversion": 0.29,
+          "volatility": 0.7,
+          "volume_price": 0.3,
+          "valuation": 0.65,
+          "fundamental": 0.2,
+          "rel_strength": 0.5
+        },
+        "total": 4.8,
+        "signal": "WEAK"
+      }
+    }
+  }
+}

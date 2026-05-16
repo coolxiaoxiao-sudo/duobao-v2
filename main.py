@@ -10,6 +10,7 @@
   python main.py --health     健康检查
   python main.py --selfcheck  自检报告
   python main.py --dashboard  启动Web看板
+  python main.py --backtest   因子回测评估
 """
 
 import json
@@ -26,9 +27,11 @@ from core.selfcheck import run as selfcheck_run
 from core.logging import get_logger
 from layer1_data.tencent_api import get_indices
 from layer2_pipeline.pipeline import run as pipeline, health
+from layer3_analysis.seven_dim import compute_all as seven_dim_all
 from layer3_analysis.technical import score_all
 from layer5_execution.audit import audit
 from layer5_execution.monitor import get_all as get_monitor
+from layer6_evolution.backtester import save_snapshot as backtest_snapshot
 from output.obsidian import save_daily, save_audit, save_portfolio_snapshot, save_action_plan, save_system_guide
 
 logger = get_logger("main")
@@ -36,7 +39,7 @@ logger = get_logger("main")
 BANNER = """
 ╔══════════════════════════════════════╗
 ║   🔮 多宝 v2.0  股票分析系统         ║
-║   六段式融合 · 自动审计 · 可视化     ║
+║   7维评分+趋势因子 · 自动审计 · 可视化     ║
 ╚══════════════════════════════════════╝"""
 
 
@@ -196,7 +199,7 @@ def _build_action_plan_md(date_str: str, sc: dict, au: dict, mn: dict, reasoner_
     lines.append("- 本清单来自系统自动生成，可在 [[30-日报/]] 查看完整日报。")
 
     return "\n".join(lines)
-def _build_report(date_str, pl, hlt, indices, scoring, audit_data, monitor, ai_market, ai_stocks, selfcheck_block, reasoner_block):
+def _build_report(date_str, pl, hlt, indices, scoring, audit_data, monitor, ai_market, ai_stocks, selfcheck_block, reasoner_block, seven_dim=None):
     idx_rows = []
     for name, d in (indices or {}).items():
         pct = d.get("pct_chg", 0)
@@ -244,6 +247,22 @@ def _build_report(date_str, pl, hlt, indices, scoring, audit_data, monitor, ai_m
     report.append("\n".join(actions) + "\n" if actions else "- 今日无止损/减仓清单\n")
 
     report.append("## 4) 明日预测 / 机会排序（六因子）\n")
+
+    # 4.5 段：7维综合评分
+    report.append("## 4.5) 7维综合评分（趋势+均值回归+波动+量价+估值+基本面+相对强度）\n")
+    if seven_dim:
+        sd_rows = []
+        for code, sd in seven_dim.items():
+            dms = sd.get("dimensions", {})
+            row = [sd.get("name", "?"), sd.get("signal", "?"), str(sd.get("total",0))]
+            for dn in ("trend","mean_reversion","volatility","volume_price","valuation","fundamental","rel_strength"):
+                row.append(str(dms.get(dn, 0)))
+            sd_rows.append(row)
+        report.append(_md_table(["股票","信号","总分","趋势","均值归回","波动","量价","估值","基本面","相对强度"], sd_rows[:15]) + "\n")
+    else:
+        report.append("（7维评分未计算）\n")
+
+    report.append("### TOP5\n")
     report.append("### TOP5\n")
     report.append(_md_table(["股票", "总分", "信号"], [[x.get("name"), f"{x.get('total',0):.3f}", x.get("signal")] for x in top5]))
     report.append("\n### Bottom5\n")
@@ -284,6 +303,14 @@ def full():
     print("\n[4/5] 预警监控")
     mn = get_monitor()
     print(f"  止损预警:{len(mn.get('stops',[]))}  止盈信号:{len(mn.get('targets',[]))}")
+
+    print("\n[4.5/5] 7维综合评分")
+    sd = seven_dim_all()
+    for _, s in sd.items():
+        print(f"  {s.get('name',''):<8} 总分:{s.get('total',0):.1f}  信号:{s.get('signal','?')}")
+
+    # 回测快照保存
+    backtest_snapshot(date_str, sc, au, sd)
 
     print("\n[5/5] DeepSeek AI 分析")
     indices = get_indices()
@@ -336,6 +363,7 @@ def full():
         ai_stocks,
         _selfcheck_md(),
         reasoner_md,
+        sd,
     )
 
     save_daily(report_md, date_str=date_str)
@@ -366,6 +394,13 @@ def main():
         print(json.dumps(get_monitor(), ensure_ascii=False, indent=2))
     elif "--health" in sys.argv:
         print(json.dumps(health(), ensure_ascii=False, indent=2))
+    if "--backtest" in sys.argv:
+        from layer6_evolution.backtester import evaluate
+        bt = evaluate()
+        print(json.dumps(bt, ensure_ascii=False, indent=2))
+    elif "--7dim" in sys.argv:
+        sd = seven_dim_all()
+        print(json.dumps(sd, ensure_ascii=False, indent=2))
     else:
         full()
 
