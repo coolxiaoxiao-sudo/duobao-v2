@@ -1,4 +1,4 @@
-﻿"""多宝 v2.0 — 一键入口
+"""多宝 v2.0 — 一键入口
 
 默认：六段式融合日报（含自检摘要 + 自动二次审计）
 
@@ -29,7 +29,7 @@ from layer2_pipeline.pipeline import run as pipeline, health
 from layer3_analysis.technical import score_all
 from layer5_execution.audit import audit
 from layer5_execution.monitor import get_all as get_monitor
-from output.obsidian import save_daily, save_audit
+from output.obsidian import save_daily, save_audit, save_portfolio_snapshot, save_action_plan, save_system_guide
 
 logger = get_logger("main")
 
@@ -157,6 +157,45 @@ def _write_local_report(text: str, date_str: str):
     return latest, dated
 
 
+
+def _build_action_plan_md(date_str: str, sc: dict, au: dict, mn: dict, reasoner_md: str) -> str:
+    """把系统输出压缩成一页‘今天要做什么’（给新任务直接读取）。"""
+    lines = []
+    lines.append("## 1) 必须优先处理（止损触发）")
+    stops = mn.get("stops") or []
+    if stops:
+        for x in stops:
+            lines.append(f"- 🚨 {x.get('name')}({x.get('code')})：现价{x.get('price')} ≤ 止损{x.get('stop')}（{x.get('pct')}%）")
+    else:
+        lines.append("- 今日无止损触发")
+
+    lines.append("\n## 2) 今日动作建议（审计结果）")
+    def _rows(action):
+        return [a for a in au.values() if a.get('action') == action]
+
+    for action in ("CLOSE", "REDUCE", "HOLD", "ADD"):
+        items = _rows(action)
+        if not items:
+            continue
+        lines.append(f"- **{action}**：" + "、".join([i.get('name','?') for i in items]))
+
+    lines.append("\n## 3) 机会关注（六因子）")
+    watch = [s for s in sc.values() if s.get('signal') in ('WATCH','BUY')][:5]
+    if watch:
+        for s in watch:
+            lines.append(f"- {s.get('name')}：{s.get('signal')} / 总分{s.get('total',0):.3f}")
+    else:
+        lines.append("- 今日无明显 WATCH/BUY")
+
+    if reasoner_md:
+        lines.append("\n## 4) 二次审计摘要（只在高风险/冲突时触发）")
+        lines.append("- 已触发 Reasoner 二次审计，详见日报中的‘二次审计（Reasoner）’段落。")
+
+    lines.append("\n## 5) 快速提醒")
+    lines.append("- 先风险后机会：先处理止损/大亏，再考虑加仓。")
+    lines.append("- 本清单来自系统自动生成，可在 [[30-日报/]] 查看完整日报。")
+
+    return "\n".join(lines)
 def _build_report(date_str, pl, hlt, indices, scoring, audit_data, monitor, ai_market, ai_stocks, selfcheck_block, reasoner_block):
     idx_rows = []
     for name, d in (indices or {}).items():
@@ -279,6 +318,12 @@ def full():
     # 自动二次审计（Reasoner）：仅在触发条件下执行
     reasoner_md = _reasoner_audit_md(sc, au, mn)
 
+    # 固化长期记忆文件：持仓清单 + 系统说明 + 今日操作清单
+    save_portfolio_snapshot(config.stocks)
+    save_system_guide()
+    action_md = _build_action_plan_md(date_str, sc, au, mn, reasoner_md)
+    save_action_plan(action_md, date_str=date_str)
+
     report_md = _build_report(
         date_str,
         pl,
@@ -327,3 +372,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
