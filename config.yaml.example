@@ -1,16 +1,16 @@
-﻿system:
+system:
   base_dir: C:/Users/alienware/Desktop/duobao_v2
   data_dir: C:/Users/alienware/Desktop/duobao_v2/data
   log_dir: C:/Users/alienware/Desktop/duobao_v2/logs
   source_db: C:/Users/alienware/database/investment.db
-  obsidian_vault: C:/Users/alienware/Documents/Obsidian Vault/solo/solo
+  obsidian_vault: C:/Users/alienware/Documents/Obsidian Vault/trae
 api_keys:
   tushare_token: ${TUSHARE_TOKEN}
-  tushare_token_fallback: e2ee4f0657acf930e92e0165183a9217310c05a720a3504cc86dcfa6
+  tushare_token_fallback: YOUR_TUSHARE_TOKEN
   deepseek_api_key: ${DEEPSEEK_API_KEY}
-  deepseek_api_key_fallback: sk-9c1b49c2ffb24c32bd4cb3461580a285
+  deepseek_api_key_fallback: YOUR_DEEPSEEK_KEY
   fred_api_key: ${FRED_API_KEY}
-  fred_api_key_fallback: 064f707159db2a2599263597d91d8427
+  fred_api_key_fallback: YOUR_FRED_KEY
 deepseek:
   base_url: https://api.deepseek.com/v1
   model: deepseek-chat
@@ -27,6 +27,8 @@ data_sources:
   tushare:
     enabled: true
     timeout: 15
+    backfill: true
+    backfill_days: 60
   akshare:
     enabled: true
   iwencai:
@@ -169,4 +171,3 @@ notifications:
     enabled: true
     host: 127.0.0.1
     port: 8088
-
