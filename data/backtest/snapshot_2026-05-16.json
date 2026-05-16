@@ -30,7 +30,7 @@
         "points": 60
       },
       "audit_action": "REDUCE",
-      "audit_total": 3.8,
+      "audit_total": 4.0,
       "seven_dim": {
         "dimensions": {
           "trend": 0.61,
@@ -73,8 +73,8 @@
         "cons_cum": -0.24,
         "points": 60
       },
-      "audit_action": "HOLD",
-      "audit_total": 5.8,
+      "audit_action": "ADD",
+      "audit_total": 7.2,
       "seven_dim": {
         "dimensions": {
           "trend": 0.72,
@@ -117,8 +117,8 @@
         "cons_cum": -1.2,
         "points": 60
       },
-      "audit_action": "REDUCE",
-      "audit_total": 3.8,
+      "audit_action": "HOLD",
+      "audit_total": 5.8,
       "seven_dim": {
         "dimensions": {
           "trend": 0.8,
@@ -162,7 +162,7 @@
         "points": 60
       },
       "audit_action": "REDUCE",
-      "audit_total": 4.2,
+      "audit_total": 4.8,
       "seven_dim": {
         "dimensions": {
           "trend": 0.91,
@@ -205,8 +205,8 @@
         "cons_cum": 2.37,
         "points": 60
       },
-      "audit_action": "CLOSE",
-      "audit_total": 2.8,
+      "audit_action": "REDUCE",
+      "audit_total": 4.2,
       "seven_dim": {
         "dimensions": {
           "trend": 0.67,
@@ -250,7 +250,7 @@
         "points": 60
       },
       "audit_action": "HOLD",
-      "audit_total": 5.8,
+      "audit_total": 6.8,
       "seven_dim": {
         "dimensions": {
           "trend": 1.28,
@@ -294,7 +294,7 @@
         "points": 60
       },
       "audit_action": "HOLD",
-      "audit_total": 6.2,
+      "audit_total": 6.8,
       "seven_dim": {
         "dimensions": {
           "trend": 1.02,
@@ -338,7 +338,7 @@
         "points": 60
       },
       "audit_action": "ADD",
-      "audit_total": 7.2,
+      "audit_total": 7.8,
       "seven_dim": {
         "dimensions": {
           "trend": 1.07,
@@ -382,7 +382,7 @@
         "points": 60
       },
       "audit_action": "ADD",
-      "audit_total": 7.2,
+      "audit_total": 7.8,
       "seven_dim": {
         "dimensions": {
           "trend": 1.09,
@@ -426,7 +426,7 @@
         "points": 60
       },
       "audit_action": "HOLD",
-      "audit_total": 5.2,
+      "audit_total": 6.8,
       "seven_dim": {
         "dimensions": {
           "trend": 0.66,
@@ -469,8 +469,8 @@
         "cons_cum": -1.7,
         "points": 60
       },
-      "audit_action": "CLOSE",
-      "audit_total": 2.8,
+      "audit_action": "REDUCE",
+      "audit_total": 4.5,
       "seven_dim": {
         "dimensions": {
           "trend": 0.77,
