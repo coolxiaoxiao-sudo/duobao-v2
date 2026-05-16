@@ -1,0 +1,48 @@
+﻿# === 密钥/环境（绝不入库） ===
+config.yaml
+.env
+*.env
+credentials.*
+secrets.*
+
+# === API 调用日志 ===
+logs/*.log
+
+# === 行情缓存/数据库 ===
+data/*.db
+data/*.sqlite
+data/cache/
+*.db-journal
+*.db-wal
+
+# === 本地日报/审计（按需入库） ===
+data/report_*.md
+data/latest_report.md
+data/audit_*.md
+
+# === 临时/中间文件 ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+*.so
+.pytest_cache/
+.mypy_cache/
+
+# === 本地 IDE/工具缓存 ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === 临时脚本 ===
+_fix*.py
+test_quick.py
+*.bat
